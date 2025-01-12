@@ -1,0 +1,820 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SpeakSmart</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="..." crossorigin="anonymous" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Additional CSS styles can be added here if needed */
+        .steps-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.step {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+    width: 80%;
+}
+
+.step-content {
+    flex: 1;
+    text-align: justify;
+    display: flex;
+    flex-direction: column;
+}
+
+.step-content h3 {
+    font-size: 3rem;
+    color: #0077b2;
+    margin-bottom: 10px;
+}
+
+.step-content p {
+    font-size: 1.2rem;
+    color: #555;
+    margin: 0 10px;
+}
+
+.step-icon {
+    flex: 1;
+    max-width: 600px;
+}
+
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.7.14/lottie.min.js"></script>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <a href="/">
+                <img src="{{ url_for('static', filename='images/2.png') }}" alt="logo">
+            </a>
+        </div>
+        <div class="text-image-container">
+            <img src="{{ url_for('static', filename='images/1.png') }}" alt="title">
+        </div>
+        <nav>
+            <ul class="nav-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/worksheet">Worksheet</a></li>
+                <li><a href="/upload">Upload</a></li>
+                <li><a href="/report">Report</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="hero-text">
+                <h2 class="typing">Speak Smart, Speak with Ease!</h2>
+                <p>Unlock your speaking confidence with SpeakSmart! Upload, analyze and improve your pronunciation skills</p>
+                <button class="try-now-btn" onclick="window.location.href='/upload'">Try Now!</button>
+            </div>
+            <div class="hero-image">
+                <img src="{{ url_for('static', filename='images/children.png') }}" alt="Children">
+            </div>
+        </section>
+
+        <section class="features">
+            <div class="feature">
+                <div class="icon"><i class="fas fa-video"></i></div>
+                <h3>Video Analyzer</h3>
+                <p>Upload video it will analyze with the expected sentence</p>
+            </div>
+            <div class="feature">
+                <div class="icon"><i class="fas fa-file-alt"></i></div>
+                <h3>Worksheet</h3>
+                <p>On clicking the animals, the proper pronunciation is produced</p>
+            </div>
+            <div class="feature">
+                <div class="icon"><i class="fas fa-microphone-alt"></i></div>
+                <h3>Suggestion Improvements</h3>
+                <p>Suggests the proper way to pronounce</p>
+            </div>
+            <div class="feature">
+                <div class="icon"><i class="fas fa-chart-line"></i></div>
+                <h3>Reports</h3>
+                <p>Report generation of the analysis</p>
+            </div>
+        </section>
+
+        <div class="steps-container">
+            <div class="step">
+                <div class="step-content">
+                    <h2 style="color: #006091;" >Bridge the Communication Gap</h2>
+                    <p>Improving pronunciation and clarity is crucial for effective communication. SpeakSmart helps users articulate words correctly, making conversations more understandable. By bridging this gap, individuals can express their thoughts more precisely, reducing misunderstandings. Enhanced communication skills can lead to better personal and professional relationships.</p>
+                </div>
+                <div class="step-icon" id="micAnimation"></div>
+            </div>
+            <div class="step">
+                <div class="step-icon" id="scoreAnimation"></div>
+                <div class="step-content">
+                    
+                    <h2 style="color: #006091;">Build Confidence</h2>
+                    <p>Confidence in speaking is essential in social and educational settings. SpeakSmart provides tools and exercises that boost self-assurance by improving pronunciation and clarity. As users become more proficient speakers, their confidence grows, enabling them to participate more actively in conversations and presentations. This newfound confidence can have a positive impact on various aspects of life, from academic achievements to social interactions.</p>
+                </div>
+                
+            </div>
+            <div class="step">
+                <div class="step-content">
+                    <h2 style="color: #006091;">Normalize Speech Development</h2>
+                    <p>SpeakSmart fosters natural and enjoyable speech improvement through interactive exercises. By making the learning process engaging and fun, users are more likely to practice regularly and make consistent progress. This normalization of speech development encourages a positive attitude towards learning and self-improvement. Over time, users can achieve noticeable improvements in their speaking abilities, leading to better communication skills and overall personal growth.                    </p>
+                </div>
+                <div class="step-icon" id="speakAnimation"></div>
+            </div>
+            
+        </div>
+    </main>
+
+    <script>
+        // Load Lottie animations
+        // document.addEventListener('DOMContentLoaded', function() {
+        //     loadAnimation('animation1', '{{ url_for('static', filename='animations/2kids.json') }}');
+        //     loadAnimation('animation2', '{{ url_for('static', filename='animations/aeiou.json') }}');
+        //     loadAnimation('animation3', '{{ url_for('static', filename='animations/kids_playing.json') }}');
+        // });
+
+        // Function to load Lottie animations
+        lottie.loadAnimation({
+                container: document.getElementById('micAnimation'),
+                renderer: 'svg',
+                loop: true,
+                autoplay: true,
+                path: '{{ url_for("static", filename="animations/2kids.json") }}'
+            });
+    
+            lottie.loadAnimation({
+                container: document.getElementById('scoreAnimation'),
+                renderer: 'svg',
+                loop: true,
+                autoplay: true,
+                path: '{{ url_for("static", filename="animations/aeiou.json") }}'
+            });
+    
+            lottie.loadAnimation({
+                container: document.getElementById('speakAnimation'),
+                renderer: 'svg',
+                loop: true,
+                autoplay: true,
+                path: '{{ url_for("static", filename="animations/kids_playing.json") }}'
+            });
+        
+    </script>
+</body>
+</html> -->
+
+
+
+<!-- 
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SpeakSmart</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="..." crossorigin="anonymous" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Additional CSS styles can be added here if needed */
+        .steps-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .step {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+            width: 80%;
+        }
+
+        .step-content {
+            flex: 1;
+            text-align: justify;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .step-content h3 {
+            font-size: 3rem;
+            color: #0077b2;
+            margin-bottom: 10px;
+        }
+
+        .step-content p {
+            font-size: 1.2rem;
+            color: #555;
+            margin: 0 10px;
+        }
+
+        .step-icon {
+            flex: 1;
+            max-width: 600px;
+        }
+
+        .video-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 20px 0;
+        }
+
+        .video-container video {
+        width: 80%;
+        max-width: 800px;
+        height: auto;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); /* Increased box shadow */
+        }
+  /* .video-container video {
+            width: 80%;
+            max-width: 800px;
+            height: auto;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        } */
+
+        .video-heading {
+            font-size: 2rem;
+            color: #0077b2;
+            margin-bottom: 10px;
+        }
+
+        .video-subheading {
+            font-size: 1.2rem;
+            color: #555;
+            margin-bottom: 20px;
+        }
+
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.7.14/lottie.min.js"></script>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <a href="/">
+                <img src="{{ url_for('static', filename='images/2.png') }}" alt="logo">
+            </a>
+        </div>
+        <div class="text-image-container">
+            <img src="{{ url_for('static', filename='images/1.png') }}" alt="title">
+        </div>
+        <nav>
+            <ul class="nav-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/worksheet">Worksheet</a></li>
+                <li><a href="/upload">Upload</a></li>
+                <li><a href="/report">Report</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="hero-text">
+                <h2 class="typing">Speak Smart, Speak with Ease!</h2>
+                <p>Unlock your speaking confidence with SpeakSmart! Upload, analyze and improve your pronunciation skills</p>
+                <button class="try-now-btn" onclick="window.location.href='/upload'">Try Now!</button>
+            </div>
+            <div class="hero-image">
+                <img src="{{ url_for('static', filename='images/children.png') }}" alt="Children">
+            </div>
+        </section>
+
+        <section class="video-tutorial">
+            <div class="video-container">
+                <h2 class="video-heading">Discover the Power of SpeakSmart!</h2>
+                <p class="video-subheading">Watch this walkthrough to see how SpeakSmart can transform your communication skills.</p>
+                <video controls>
+                    <source src="{{ url_for('static', filename='tut/tutorial.mp4') }}" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+        </section>
+
+        <section class="features">
+            <div class="feature">
+                <div class="icon"><i class="fas fa-video"></i></div>
+                <h3>Video Analyzer</h3>
+                <p>Upload video it will analyze with the expected sentence</p>
+            </div>
+            <div class="feature">
+                <div class="icon"><i class="fas fa-file-alt"></i></div>
+                <h3>Worksheet</h3>
+                <p>On clicking the animals, the proper pronunciation is produced</p>
+            </div>
+            <div class="feature">
+                <div class="icon"><i class="fas fa-microphone-alt"></i></div>
+                <h3>Suggestion Improvements</h3>
+                <p>Suggests the proper way to pronounce</p>
+            </div>
+            <div class="feature">
+                <div class="icon"><i class="fas fa-chart-line"></i></div>
+                <h3>Reports</h3>
+                <p>Report generation of the analysis</p>
+            </div>
+        </section>
+
+        <div class="steps-container">
+            <div class="step">
+                <div class="step-content">
+                    <h2 style="color: #006091;" >Bridge the Communication Gap</h2>
+                    <p>Improving pronunciation and clarity is crucial for effective communication. SpeakSmart helps users articulate words correctly, making conversations more understandable. By bridging this gap, individuals can express their thoughts more precisely, reducing misunderstandings. Enhanced communication skills can lead to better personal and professional relationships.</p>
+                </div>
+                <div class="step-icon" id="micAnimation"></div>
+            </div>
+            <div class="step">
+                <div class="step-icon" id="scoreAnimation"></div>
+                <div class="step-content">
+                    <h2 style="color: #006091;">Build Confidence</h2>
+                    <p>Confidence in speaking is essential in social and educational settings. SpeakSmart provides tools and exercises that boost self-assurance by improving pronunciation and clarity. As users become more proficient speakers, their confidence grows, enabling them to participate more actively in conversations and presentations. This newfound confidence can have a positive impact on various aspects of life, from academic achievements to social interactions.</p>
+                </div>
+            </div>
+            <div class="step">
+                <div class="step-content">
+                    <h2 style="color: #006091;">Normalize Speech Development</h2>
+                    <p>SpeakSmart fosters natural and enjoyable speech improvement through interactive exercises. By making the learning process engaging and fun, users are more likely to practice regularly and make consistent progress. This normalization of speech development encourages a positive attitude towards learning and self-improvement. Over time, users can achieve noticeable improvements in their speaking abilities, leading to better communication skills and overall personal growth.</p>
+                </div>
+                <div class="step-icon" id="speakAnimation"></div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Load Lottie animations
+        lottie.loadAnimation({
+            container: document.getElementById('micAnimation'),
+            renderer: 'svg',
+            loop: true,
+            autoplay: true,
+            path: '{{ url_for("static", filename="animations/2kids.json") }}'
+        });
+
+        lottie.loadAnimation({
+            container: document.getElementById('scoreAnimation'),
+            renderer: 'svg',
+            loop: true,
+            autoplay: true,
+            path: '{{ url_for("static", filename="animations/aeiou.json") }}'
+        });
+
+        lottie.loadAnimation({
+            container: document.getElementById('speakAnimation'),
+            renderer: 'svg',
+            loop: true,
+            autoplay: true,
+            path: '{{ url_for("static", filename="animations/kids_playing.json") }}'
+        });
+    </script>
+</body>
+</html> -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SpeakSmart</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="..." crossorigin="anonymous" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden; /* Prevent horizontal scrolling */
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            background-color: #ffa500; /* Your orange background color */
+            text-align: center;
+        }
+
+        .logo img {
+            width: 100px;
+            height: auto;
+        }
+
+        .text-image-container img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        nav ul li {
+            display: inline;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: #333;
+            font-weight: bold;
+        }
+
+        .hero-text {
+            text-align: center;
+            padding: 20px;
+        }
+
+        .hero-text h2 {
+            font-size: 2.5rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); /* Add text shadow */
+        }
+
+        .hero-text p {
+            margin: 10px 0;
+        }
+
+        .try-now-btn {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 10px 20px;
+            font-size: 1rem;
+            color: white;
+            background-color: #0077b2;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .steps-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .step {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+            width: 80%;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 1.5s ease-out, transform 1.5s ease-out; /* Increased duration */
+        }
+
+        .step-content {
+            flex: 1;
+            text-align: justify;
+            display: flex;
+            flex-direction: column;
+            background-color: #f0f0f0; /* Light grey to mimic a white chalkboard */
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border: 1px solid #e0e0e0;
+        }
+
+        .step-content h3, .step-content p {
+            color: #2c2c2c; /* Dark grey for chalk effect */
+            text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.8); /* Simulate chalk effect */
+            font-family: 'Caveat', cursive; /* A font that looks like chalk writing */
+        }
+
+        .step-content h3 {
+            font-size: 2.5rem; /* Increased font size */
+        }
+
+        .step-content p {
+            font-size: 1.25rem; /* Increased font size */
+            margin: 0 10px;
+        }
+
+        .step-icon {
+            flex: 1;
+            max-width: 600px;
+        }
+
+        .video-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 20px 0;
+        }
+
+        .video-container video {
+            width: 80%;
+            max-width: 800px;
+            height: auto;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Increased box shadow */
+        }
+
+        .video-heading {
+            font-size: 2rem;
+            color: #0077b2;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .video-subheading {
+            font-size: 1.2rem;
+            color: #555;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        /* Feature cards */
+        .features {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 20px 0;
+            padding: 0 10%;
+        }
+
+        .feature {
+            flex: 1;
+            margin: 10px; /* Adjusted margin */
+            padding: 20px;
+            text-align: center;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Added box shadow */
+            transition: transform 0.3s, box-shadow 0.3s, background-color 0.3s, opacity 1.5s ease-out, transform 1.5s ease-out;
+            height: 250px; /* Set a fixed height */
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .feature:hover {
+            transform: scale(1.05);
+            background-color: #e0e0e0;
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Responsive styles */
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .logo {
+                margin-bottom: 10px;
+            }
+
+            .text-image-container {
+                text-align: center;
+            }
+
+            .nav-links {
+                flex-direction: column;
+                gap: 5px;
+            }
+
+            .hero-text h2 {
+                font-size: 2rem;
+            }
+
+            .hero-text p, .try-now-btn {
+                margin-top: 10px;
+            }
+
+            .step {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .step-icon, .step-content {
+                max-width: 100%;
+                width: 100%;
+                text-align: center;
+            }
+
+            .features {
+                flex-direction: column;
+                align-items: center;
+                padding: 0;
+            }
+
+            .feature {
+                margin: 10px 0;
+                width: 80%; /* Adjust width for smaller screens */
+                height: auto; /* Adjust height for smaller screens */
+            }
+        }
+
+        /* Section heading */
+        .section-heading {
+            text-align: center;
+            font-size: 2rem;
+            color: #0077b2;
+            margin: 40px 0 20px 0;
+        }
+
+        /* Hamburger menu */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .hamburger div {
+            width: 25px;
+            height: 3px;
+            background-color: #333;
+            margin: 5px;
+            transition: 0.4s;
+        }
+
+        .nav-links {
+            display: flex;
+        }
+
+        @media (max-width: 768px) {
+            .hamburger {
+                display: flex;
+            }
+
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                width: 100%;
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.7.14/lottie.min.js"></script>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <a href="/">
+                <img src="{{ url_for('static', filename='images/2.png') }}" alt="logo">
+            </a>
+        </div>
+        <div class="text-image-container">
+            <img src="{{ url_for('static', filename='images/1.png') }}" alt="title">
+        </div>
+        <nav>
+            <ul class="nav-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/worksheet">Worksheet</a></li>
+                <li><a href="/upload">Upload</a></li>
+                <li><a href="/report">Report</a></li>
+            </ul>
+            <div class="hamburger" onclick="toggleHamburger()">
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="hero-text">
+                <h2 class="typing">Speak Smart, Speak with Ease!</h2>
+                <p>Unlock your speaking confidence with SpeakSmart! Upload, analyze and improve your pronunciation skills</p>
+                <button class="try-now-btn" onclick="window.location.href='/upload'">Try Now!</button>
+            </div>
+            <div class="hero-image">
+                <img src="{{ url_for('static', filename='images/children.png') }}" alt="Children">
+            </div>
+        </section>
+
+        <!-- Embedded Video Section -->
+        <section class="video-tutorial">
+            <div class="video-container">
+                <h2 class="video-heading">Discover the Power of SpeakSmart!</h2>
+                <p class="video-subheading">Watch this walkthrough to see how SpeakSmart can transform your communication skills.</p>
+                <video controls>
+                    <source src="{{ url_for('static', filename='tut/tutorial.mp4') }}" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+        </section>
+
+        <section class="features">
+            <div class="feature">
+                <div class="icon"><i class="fas fa-video"></i></div>
+                <h3>Video Analyzer</h3>
+                <p>Upload video it will analyze with the expected sentence</p>
+            </div>
+            <div class="feature">
+                <div class="icon"><i class="fas fa-file-alt"></i></div>
+                <h3>Worksheet</h3>
+                <p>On clicking the animals, the proper pronunciation is produced</p>
+            </div>
+            <div class="feature">
+                <div class="icon"><i class="fas fa-microphone-alt"></i></div>
+                <h3>Suggestion Improvements</h3>
+                <p>Suggests the proper way to pronounce</p>
+            </div>
+            <div class="feature">
+                <div class="icon"><i class="fas fa-chart-line"></i></div>
+                <h3>Reports</h3>
+                <p>Report generation of the analysis</p>
+            </div>
+        </section>
+
+        <h2 class="section-heading">Help Your Child for a Better Living</h2>
+
+        <div class="steps-container">
+            <div class="step">
+                <div class="step-content">
+                    <h3>Bridge the Communication Gap</h3>
+                    <p>Improving pronunciation and clarity is crucial for effective communication. SpeakSmart helps users articulate words correctly, making conversations more understandable. Enhanced communication skills can lead to better personal and professional relationships.</p>
+                </div>
+                <div class="step-icon" id="micAnimation"></div>
+            </div>
+            <div class="step">
+                <div class="step-icon" id="scoreAnimation"></div>
+                <div class="step-content">
+                    <h3>Build Confidence</h3>
+                    <p>Confidence in speaking is essential in social and educational settings. SpeakSmart provides tools and exercises that boost self-assurance by improving pronunciation and clarity. This newfound confidence can have a positive impact on various aspects of life, from academic achievements to social interactions.</p>
+                </div>
+            </div>
+            <div class="step">
+                <div class="step-content">
+                    <h3>Normalize Speech Development</h3>
+                    <p>SpeakSmart fosters natural and enjoyable speech improvement through interactive exercises. By making the learning process engaging and fun, users are more likely to practice regularly and make consistent progress. Over time, users can achieve noticeable improvements in their speaking abilities, leading to better communication skills and overall personal growth.</p>
+                </div>
+                <div class="step-icon" id="speakAnimation"></div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        function toggleHamburger() {
+            const navLinks = document.querySelector('.nav-links');
+            navLinks.classList.toggle('active');
+        }
+
+        // Load Lottie animations
+        lottie.loadAnimation({
+            container: document.getElementById('micAnimation'),
+            renderer: 'svg',
+            loop: true,
+            autoplay: true,
+            path: '{{ url_for("static", filename="animations/2kids.json") }}'
+        });
+
+        lottie.loadAnimation({
+            container: document.getElementById('scoreAnimation'),
+            renderer: 'svg',
+            loop: true,
+            autoplay: true,
+            path: '{{ url_for("static", filename="animations/aeiou.json") }}'
+        });
+
+        lottie.loadAnimation({
+            container: document.getElementById('speakAnimation'),
+            renderer: 'svg',
+            loop: true,
+            autoplay: true,
+            path: '{{ url_for("static", filename="animations/kids_playing.json") }}'
+        });
+
+        // Fade-in animations
+        const fadeElements = document.querySelectorAll('.step, .feature');
+
+        const fadeInOnScroll = () => {
+            fadeElements.forEach(element => {
+                const rect = element.getBoundingClientRect();
+                if (rect.top < window.innerHeight) {
+                    element.style.opacity = 1;
+                    element.style.transform = 'translateY(0)';
+                }
+            });
+        };
+
+        window.addEventListener('scroll', fadeInOnScroll);
+        window.addEventListener('load', fadeInOnScroll);
+    </script>
+</body>
+</html>

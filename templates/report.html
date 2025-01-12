@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Report</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Bubblegum+Sans&family=Titan+One&display=swap');
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #006091; /* Updated text color */
+            background-color: #f7f9fc;
+        }
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            background-color: #fe9901; /* Updated background color */
+            border-bottom: 1px solid #ccc;
+        }
+        .logo img {
+            height: 50px;
+        }
+        .text-image-container img {
+            height: 30px;
+        }
+ 
+
+
+        .content {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 20px;
+            background-color: #ffd6a5; /* Updated background color */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            color: #006091; /* Updated text color */
+        }
+        h2, h3 {
+            color: #006091;
+            text-decoration: underline;
+            font-family: 'Titan One', sans-serif;
+            font-weight: 500;
+        }
+        ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        ul li {
+            margin-bottom: 15px;
+        }
+        .suggestion {
+            background-color: #B1CADB; /* Updated background color */
+            color: #006091; /* Ensure text is readable */
+            padding: 10px;
+            border-radius: 5px;
+        }
+        .download_button {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 16px;
+            font-family: 'Bubblegum Sans', sans-serif;
+            color: #fff;
+            background-color: #0077b2;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+        .download_button:hover {
+            background-color: #005f8c;
+        }
+        .box{
+            background-color: #ffd6a5;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <a href="/">
+                <img src="{{ url_for('static', filename='images/2.png') }}" alt="logo">
+            </a>
+        </div>
+        <div class="text-image-container">
+            <img src="{{ url_for('static', filename='images/1.png') }}" alt="title">
+        </div>
+        <nav>
+            <ul class="nav-links" style="font-family: Titan One;font-weight: 500; font-size: 20px">
+                <li style="font-family: Titan One;font-weight: 500; font-size: 20px"><a href="/">Back Home</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main >
+        <div class="content" style="background-color: #ffd6a5; font-size: 20px" >
+            <h2>Report</h2>
+            <div class="box">
+                <h3>Overall Similarity Score:</h3>
+                <p>{{ results['overall_similarity'] }}</p>
+                <h3>Detailed Analysis:</h3>
+                <ul>
+                    {% for item in results['analysis'] %}
+                        <li>
+                            <strong>Expected:</strong> {{ item['expected'] }}<br>
+                            <strong>Transcribed:</strong> {{ item['transcribed'] }}<br>
+                            <strong>Similarity:</strong> {{ item['similarity'] }}
+                            {% if item['similarity'] < 1.0 %}
+                                <p>Suggestion: Practice saying '{{ item['expected'] }}' more clearly.</p>
+                            {% endif %}
+                        </li>
+                    {% endfor %}
+                </ul>
+               
+                <h3>Suggestions for Improvement:</h3>
+                <ul>
+                    {% for suggestion in results['suggestions'] %}
+                        <li class="suggestion">{{ suggestion }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <a class="download_button" onclick="window.location.href='{{ url_for('download_pdf') }}'">Download as PDF</a>
+        </div>
+    </main>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+
+    <!-- JavaScript code for generating and downloading the PDF -->
+    <script>
+        function downloadPDF() {
+            // Create a new jsPDF instance
+            const doc = new jsPDF();
+
+            // Get the content of the report section and add it to the PDF
+            const content = document.querySelector('.content');
+            doc.html(content, {
+                callback: function (doc) {
+                    // Save the PDF with the name 'report.pdf'
+                    doc.save('report.pdf');
+                }
+            });
+        }
+    </script>
+</body>
+</html>

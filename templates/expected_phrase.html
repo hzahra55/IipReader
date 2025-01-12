@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enter Expected Phrase</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <style>
+        /* Additional CSS for alignment */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            background-color: #ffd6a5;
+            color: #333333;
+        }
+        
+        header {
+            background-color: #ff9900;
+            color: #fff;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            position: relative;
+        }
+
+        .logo img {
+            width: 100px;
+            height: auto;
+            margin-right: 10px;
+        }
+
+        .text-image-container img {
+            vertical-align: middle;
+            width: 200px;
+            height: auto;
+        }
+
+        .nav-links {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            font-size: larger;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-weight: 700;
+        }
+
+        .nav-links li {
+            display: inline;
+            margin-right: 20px;
+            position: relative;
+        }
+
+        .nav-links li::after {
+            content: "";
+            position: absolute;
+            top: 50%;
+            right: -10px;
+            width: 2px;
+            height: 20px;
+            background-color:  #0077b2;
+            transform: translateY(-50%);
+        }
+
+        .nav-links li:last-child::after {
+            display: none;
+        }
+
+        .nav-links li a {
+            text-decoration: none;
+            color: #0077b2;
+        }
+
+        .nav-links li a:hover {
+            color: #006090;
+            font-size: larger;
+        }
+
+        main {
+            text-align: center;
+            margin-top: 2rem;
+        }
+
+        h2 {
+            font-family: 'Bubblegum Sans', cursive;
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        form {
+            display: inline-block;
+            background-color: #fff;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 0.5rem;
+            margin-bottom: 1rem;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button[type="submit"] {
+            background-color: #0077b2;
+            color: #fff;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-family: 'Bubblegum Sans', cursive;
+            font-size: 1.2rem;
+            transition: background-color 0.3s;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #005e82;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <a href="/">
+                <img src="{{ url_for('static', filename='images/2.png') }}" alt="logo">
+            </a>
+        </div>
+        <div class="text-image-container">
+            <img src="{{ url_for('static', filename='images/1.png') }}" alt="title">
+        </div>
+        <nav>
+            <ul class="nav-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/worksheet">Worksheet</a></li>
+                <li><a href="/report">Report</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <h2>Enter the expected word or phrase for analysis</h2>
+        <form method="post">
+            <input type="text" name="expected_text" placeholder="Expected Phrase" required>
+            <button type="submit">Start Analyzing</button>
+        </form>
+    </main>
+</body>
+</html>

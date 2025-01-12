@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analysis Results</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            background-color: #ffd6a5;
+            color: #333333;
+        }
+
+        header {
+            background-color: #ff9900;
+            color: #fff;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            position: relative;
+        }
+
+        .logo img {
+            width: 100px;
+            height: auto;
+            margin-right: 10px;
+        }
+
+        .text-image-container img {
+            vertical-align: middle;
+            width: 200px;
+            height: auto;
+        }
+
+        .nav-links {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            font-size: larger;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+        }
+
+        .nav-links li {
+            display: inline;
+            margin-right: 20px;
+            position: relative;
+        }
+
+        .nav-links li::after {
+            content: "";
+            position: absolute;
+            top: 50%;
+            right: -10px;
+            width: 2px;
+            height: 20px;
+            background-color:  #0077b2;
+            transform: translateY(-50%);
+        }
+
+        .nav-links li:last-child::after {
+            display: none;
+        }
+
+        .nav-links li a {
+            text-decoration: none;
+            
+            color: #0077b2;
+        }
+
+        .nav-links li a:hover {
+            color: #006090;
+            font-size: larger;
+        }
+
+        main {
+            text-align: center;
+            margin: 2rem auto;
+            max-width: 800px;
+            background-color: #fff;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h2, h3 {
+            color: #006091;
+            text-decoration: underline;
+            font-family: 'Titan One', sans-serif;
+            font-weight: 500px;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        li {
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .analysis-item {
+            margin-bottom: 2rem; /* Increased gap between items */
+        }
+
+        .analysis-item span {
+            display: block;
+            margin: 0.5rem 0; /* Gap between lines */
+        }
+
+        audio {
+            display: block;
+            margin: 0.5rem auto;
+        }
+
+        button[type="submit"] {
+            background-color: #0077b2;
+            color: #fff;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.2rem;
+            transition: background-color 0.3s;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #005e82;
+        }
+
+        p, li {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <a href="/">
+                <img src="{{ url_for('static', filename='images/2.png') }}" alt="logo">
+            </a>
+        </div>
+        <div class="text-image-container">
+            <img src="{{ url_for('static', filename='images/1.png') }}" alt="title">
+        </div>
+        <nav>
+            <ul class="nav-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/worksheet">Worksheet</a></li>
+                <li><a href="/upload">Upload</a></li>
+                <li><a href="/report">Report</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main style="background-color: #ffd6a5; color: #006091" >
+        <h2>Analyzing {{ results['filename'] }}</h2>
+        <p><strong>Expected Phrase:</strong> {{ results['expected_text'] }}</p>
+        <p><strong>Transcription:</strong> {{ results['transcription'] }}</p>
+        <p><strong>Overall Similarity Score:</strong> {{ results['overall_similarity'] }}</p>
+        
+        <h3>Detailed Analysis</h3>
+        <ul>
+            {% for item in results['analysis'] %}
+                <li class="analysis-item">
+                    <span><strong>Expected:</strong> {{ item['expected'] }}</span>
+                    <span><strong>Transcribed:</strong> {{ item['transcribed'] }}</span>
+                    <span><strong>Similarity:</strong> {{ item['similarity'] }}</span>
+                </li>
+            {% endfor %}
+        </ul>
+
+        <h3>Phoneme-level Analysis</h3>
+        <ul>
+            {% for phoneme in results['phoneme_analysis'] %}
+                <li class="analysis-item">
+                    <span><strong>Phoneme:</strong> {{ phoneme['phoneme'] }} (from word '{{ phoneme['word'] }}')</span>
+                    <span><strong>Analysis:</strong> {{ phoneme['feedback'] }}</span>
+                    {% if phoneme['audio_file'] %}
+                        <audio controls>
+                            <source src="{{ url_for('serve_audio', filename=phoneme['audio_file'].split('/')[-1]) }}" type="audio/wav">
+                            Your browser does not support the audio element.
+                        </audio>
+                    {% endif %}
+                </li>
+            {% endfor %}
+        </ul>
+        
+        <form action="{{ url_for('report') }}">
+            <button type="submit">Show Report</button>
+        </form>
+    </main>
+</body>
+</html>

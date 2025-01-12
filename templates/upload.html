@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Video</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <style>
+        body {
+            background-color: #f8f8f8;
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        header {
+            background-color: #ff9900;
+            color: #fff;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+        }
+
+        .nav-links {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .nav-links li {
+            display: inline;
+            margin-right: 20px;
+            position: relative;
+        }
+
+        .nav-links li a {
+            text-decoration: none;
+            color: #0077b2;
+            font-size: 1.2rem;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links li a:hover {
+            color: #006090;
+        }
+
+        .content {
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: #0077b2;
+        }
+
+        .upload-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+            border: 2px dashed #0077b2;
+            border-radius: 10px;
+            background-color: #fff;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            width: 60%;
+            margin: 0 auto;
+            margin-bottom: 40px;
+        }
+
+        .upload-container input[type="file"] {
+            display: none;
+        }
+
+        .upload-container label {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .upload-icon {
+            font-size: 3rem;
+            color: #0077b2;
+            margin-bottom: 1rem;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        .upload-text {
+            font-size: 1.5rem;
+            color: #0077b2;
+            margin-bottom: 1rem;
+        }
+
+        .upload-info {
+            font-size: 1rem;
+            color: #555;
+            margin-bottom: 1rem;
+        }
+
+        .upload-btn {
+            background-color: #0077b2;
+            color: #fff;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: background-color 0.3s;
+        }
+
+        .upload-btn:hover {
+            background-color: #005e82;
+        }
+
+        .steps-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 50px;
+        }
+
+        .step {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 40px;
+            width: 80%;
+        }
+
+        .step-content {
+            flex: 1;
+            text-align: left;
+        }
+
+        .step-content h3 {
+            font-size: 2rem;
+            color: #0077b2;
+            margin-bottom: 10px;
+        }
+
+        .step-content p {
+            font-size: 1.2rem;
+            color: #555;
+            margin: 0 20px;
+        }
+
+        .step-icon {
+            flex: 1;
+            max-width: 200px;
+        }
+
+        .file-popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .popup-content {
+            text-align: center;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            cursor: pointer;
+        }
+        .upload-message {
+    font-size: 1.5rem;
+    color: #0077b2;
+    margin-top: 20px;
+    display: none;
+}
+
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.7.14/lottie.min.js"></script>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <a href="/">
+                <img src="{{ url_for('static', filename='images/2.png') }}" alt="logo">
+            </a>
+        </div>
+        <div class="text-image-container">
+            <img src="{{ url_for('static', filename='images/1.png') }}" alt="title">
+        </div>
+        <nav>
+            <ul class="nav-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/worksheet">Worksheet</a></li>
+                <li><a href="/upload">Upload</a></li>
+                <li><a href="/report">Report</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <div class="content">
+            <h2>Upload Video</h2>
+            <form id="uploadForm" action="{{ url_for('upload') }}" method="post" enctype="multipart/form-data">
+                <div class="upload-container">
+                    <label for="file">
+                        <div class="upload-icon">&#8679;</div>
+                        <div class="upload-text">Browse or drag a file here</div>
+                        <div class="upload-info">*File supported: png, jpg & webp</div>
+                    </label>
+                    <input type="file" name="file" id="file" accept="video/*">
+                </div>
+            </form>
+            <button type="button" id="uploadBtn" class="upload-btn">Upload</button>
+             <!-- Added message div -->
+        <div id="uploadMessage" class="upload-message" style="display: none;">
+            Video uploaded
+        </div>
+            <div class="steps-container">
+                <div class="step">
+                    <div class="step-content">
+                        <h3>Record Your Speech</h3>
+                        <p>Simply speak into your device and let our system analyze your phonemes.</p>
+                    </div>
+                    <div class="step-icon" id="micAnimation"></div>
+                </div>
+                <div class="step">
+                    <div class="step-icon" id="scoreAnimation"></div>
+                    <div class="step-content">
+                        <h3>Get Your Score</h3>
+                        <p>Receive an immediate, detailed score that highlights areas for improvement.</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-content">
+                        <h3>Improve with Audio Exercises</h3>
+                        <p>Follow personalized audio exercises to enhance your pronunciation skills.</p>
+                    </div>
+                    <div class="step-icon" id="speakAnimation"></div>
+                </div>
+                <div class="step">
+                    <div class="step-icon" id="progressAnimation"></div>
+                    <div class="step-content">
+                        <h3>Track Your Progress</h3>
+                        <p>Keep track of your improvements with our intuitive progress tracker.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div id="filePopup" class="file-popup" style="background-color: #B1CADB;">
+        <div class="popup-content">
+            <span class="close-btn">&times;</span>
+            <p>Please select a file to upload.</p>
+        </div>
+    </div>
+
+
+    <script>
+        // document.addEventListener('DOMContentLoaded', function () {
+        //     var uploadBtn = document.getElementById('uploadBtn');
+        //     var fileInput = document.getElementById('file');
+        //     var filePopup = document.getElementById('filePopup');
+        //     var closeBtn = document.querySelector('.close-btn');
+    
+        //     uploadBtn.addEventListener('click', function () {
+        //         if (fileInput.files.length === 0) {
+        //             filePopup.style.display = 'block';
+        //         } else {
+        //             filePopup.style.display = 'none'; // Hide popup if file is selected
+        //             document.getElementById('uploadForm').submit();
+        //         }
+        //     });
+    
+        //     closeBtn.addEventListener('click', function () {
+        //         filePopup.style.display = 'none';
+        //     });
+    
+        //     // Load Lottie animations
+        //     lottie.loadAnimation({
+        //         container: document.getElementById('micAnimation'),
+        //         renderer: 'svg',
+        //         loop: true,
+        //         autoplay: true,
+        //         path: '{{ url_for("static", filename="animations/mic.json") }}'
+        //     });
+    
+        //     lottie.loadAnimation({
+        //         container: document.getElementById('scoreAnimation'),
+        //         renderer: 'svg',
+        //         loop: true,
+        //         autoplay: true,
+        //         path: '{{ url_for("static", filename="animations/score.json") }}'
+        //     });
+    
+        //     lottie.loadAnimation({
+        //         container: document.getElementById('speakAnimation'),
+        //         renderer: 'svg',
+        //         loop: true,
+        //         autoplay: true,
+        //         path: '{{ url_for("static", filename="animations/speak.json") }}'
+        //     });
+    
+        //     lottie.loadAnimation({
+        //         container: document.getElementById('progressAnimation'),
+        //         renderer: 'svg',
+        //         loop: true,
+        //         autoplay: true,
+        //         path: '{{ url_for("static", filename="animations/progress.json") }}'
+        //     });
+        // });
+
+        document.addEventListener('DOMContentLoaded', function () {
+    var uploadBtn = document.getElementById('uploadBtn');
+    var fileInput = document.getElementById('file');
+    var filePopup = document.getElementById('filePopup');
+    var closeBtn = document.querySelector('.close-btn');
+    var uploadMessage = document.getElementById('uploadMessage');
+
+    uploadBtn.addEventListener('click', function () {
+        if (fileInput.files.length === 0) {
+            filePopup.style.display = 'block';
+        } else {
+            filePopup.style.display = 'none'; // Hide popup if file is selected
+            // Assuming a successful upload for demonstration purposes
+            document.getElementById('uploadForm').submit();
+            uploadMessage.style.display = 'block'; // Show success message
+        }
+    });
+
+    closeBtn.addEventListener('click', function () {
+        filePopup.style.display = 'none';
+    });
+
+    // Load Lottie animations
+    lottie.loadAnimation({
+        container: document.getElementById('micAnimation'),
+        renderer: 'svg',
+        loop: true,
+        autoplay: true,
+        path: '{{ url_for("static", filename="animations/mic.json") }}'
+    });
+
+    lottie.loadAnimation({
+        container: document.getElementById('scoreAnimation'),
+        renderer: 'svg',
+        loop: true,
+        autoplay: true,
+        path: '{{ url_for("static", filename="animations/score.json") }}'
+    });
+
+    lottie.loadAnimation({
+        container: document.getElementById('speakAnimation'),
+        renderer: 'svg',
+        loop: true,
+        autoplay: true,
+        path: '{{ url_for("static", filename="animations/speak.json") }}'
+    });
+
+    lottie.loadAnimation({
+        container: document.getElementById('progressAnimation'),
+        renderer: 'svg',
+        loop: true,
+        autoplay: true,
+        path: '{{ url_for("static", filename="animations/progress.json") }}'
+    });
+});
+
+    </script>
+    </body>
+    </html>
