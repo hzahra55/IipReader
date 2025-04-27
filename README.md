@@ -33,8 +33,8 @@ Here is the demo video
 # Installation and Running Locally
 
 - Clone the repository
-  git clone https://github.com/yourusername/speechsmart.git
-  cd speechsmart
+  git clone https://github.com/hzahra55/lipReader.git
+  cd lipReader
 
 - Install backend dependencies
   pip install -r requirements.txt
