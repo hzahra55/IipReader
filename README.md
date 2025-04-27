@@ -30,6 +30,10 @@ The platform is designed for therapists, teachers, and parents to support early 
 Here is the demo video
 
 
+https://github.com/user-attachments/assets/c12d4915-d033-4454-81b5-2b469fe3ab11
+
+
+
 # Installation and Running Locally
 
 - Clone the repository
